@@ -41,6 +41,7 @@ public class GetPersonTestsFixture
     public GetPersonTestsFixture()
     {
         _factory = new WebApplicationFactory<Program>();
+        _factory.ClientOptions.AllowAutoRedirect = false;
     }
 
     public HttpClient CreateClient() => _factory.CreateClient();

@@ -17,5 +17,9 @@ services:
         "test",
         "--no-build", 
         "--verbosity",
-        "normal"
+        "normal",
+        "-r", 
+        "TestResults",
+        "--logger", 
+        "trx;LogFileName=test-results.trx""
       ]

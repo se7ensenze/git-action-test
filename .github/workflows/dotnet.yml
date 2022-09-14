@@ -32,6 +32,15 @@ jobs:
       - name: Rung Testing
         run: docker-compose -f "docker-compose-tests.yml" up -d --build
         
+      - name: Showing Test Result
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: DotNET Tests
+          path: "**/test-results.trx"
+          reporter: dotnet-trx
+          fail-on-error: true
+        
       - name: Stop containers
         if: always()
         run: docker-compose -f "docker-compose-db.yml" down --remove-orphans
