@@ -34,4 +34,4 @@ jobs:
         
       - name: Stop containers
         if: always()
-        run: docker-compose -f "docker-compose-db.yml" --remove-orphans down
+        run: docker-compose -f "docker-compose-db.yml" down --remove-orphans

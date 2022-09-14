@@ -9,8 +9,8 @@ services:
     environment:
       - ConnectionStrings__TestDb=Server=my-postgres;Port=5432;Database=test;User Id=postgres;Password=postgres;"
     volumes:
-      - ./src:/src
-    working_dir: ./
+      - ./:/app
+    working_dir: /app
     command:
       [
         "dotnet",
