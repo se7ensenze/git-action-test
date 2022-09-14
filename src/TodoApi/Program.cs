@@ -1,3 +1,5 @@
+using TodoApi;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +10,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+EvolveMigrator.MigrateDatabase(assemblyName: builder.Environment.ApplicationName,
+    connectionString: "Server=localhost;Port=5432;Database=test;User Id=postgres;Password=postgres;",
+    defaultDbName: "postgres",
+    includeSeedData: true,
+    dropDatabase: true,
+    Console.WriteLine); 
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
