@@ -1,3 +1,5 @@
+using System.Data;
+using Npgsql;
 using TodoApi;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,10 +11,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddTransient<IDbConnection>((services) =>
+ new NpgsqlConnection(
+        services.GetRequiredService<IConfiguration>()
+            .GetConnectionString("TestDb"))
+);
+
 var app = builder.Build();
 
 EvolveMigrator.MigrateDatabase(assemblyName: builder.Environment.ApplicationName,
-    connectionString: "Server=localhost;Port=5432;Database=test;User Id=postgres;Password=postgres;",
+    connectionString: app.Configuration.GetConnectionString("TestDb"),
     defaultDbName: "postgres",
     includeSeedData: true,
     dropDatabase: true,
