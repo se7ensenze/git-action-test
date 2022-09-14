@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - uses: isbag/compose-action@v1.2.0
+    - uses: isbang/compose-action@v1.2.0
       with:        
         compose-file: "docker-compose-db.yml"
     - name: Setup .NET
