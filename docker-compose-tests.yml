@@ -1,0 +1,22 @@
+version: "3.9"
+networks:
+  default:
+    name: my-solution-infrastructure
+services:
+  integration-tests:
+    container_name: integration-tests
+    image: mcr.microsoft.com/dotnet/sdk:6.0
+    environment:
+      - ConnectionStrings__TestDb=Server=my-postgres;Port=5432;Database=test;User Id=postgres;Password=postgres;"
+    volumes:
+      - .:/src
+      - ../test:/test
+    working_dir: /src
+    command:
+      [
+        "dotnet",
+        "test",
+        "--no-build", 
+        "--verbosity",
+        "normal"
+      ]
