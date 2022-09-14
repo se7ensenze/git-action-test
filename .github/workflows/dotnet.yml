@@ -30,7 +30,6 @@ jobs:
         run: docker-compose -f "docker-compose-db.yml" up -d --build
         
       - name: Rung Testing
-        working-directory: ./src
         run: docker-compose -f "docker-compose-tests.yml" up -d --build
         
       - name: Stop containers
