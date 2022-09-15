@@ -33,13 +33,12 @@ services:
     working_dir: /app
     command:
       [
+        "Scripts/wait-for-it.sh",
+        "postgres:5499",
+        "--",
         "dotnet",
         "test",
-        " --no-restore",
-        "-r",
-        "TestResults",
-        "--logger",
-        "trx;LogFileName=test-results.trx"
+        "--no-restore"
       ]
-    links:
+    depends_on:
       - postgres
