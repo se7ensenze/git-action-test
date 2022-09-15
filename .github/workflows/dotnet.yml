@@ -27,19 +27,10 @@ jobs:
         run: dotnet build --no-restore
         
       - name: Running Testing Infrastructure
-        run: docker-compose -f "docker-compose-db.yml" up -d --build
+        run: docker-compose -f "docker-compose-db.yml" up 
         
       - name: Rung Testing
-        run: docker-compose -f "docker-compose-tests.yml" up -d --build
-        
-      - name: Showing Test Result
-        uses: dorny/test-reporter@v1
-        if: always()
-        with:
-          name: DotNET Tests
-          path: "TestResults/test-results.trx"
-          reporter: dotnet-trx
-          fail-on-error: true
+        run: docker-compose -f "docker-compose-tests.yml" up --exit-code-from integration-tests
         
       - name: Stop containers
         if: always()
