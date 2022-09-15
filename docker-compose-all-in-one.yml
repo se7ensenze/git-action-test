@@ -35,6 +35,7 @@ services:
       [
         "dotnet",
         "test",
+        " --no-restore",
         "-r",
         "TestResults",
         "--logger",

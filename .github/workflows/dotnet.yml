@@ -27,8 +27,4 @@ jobs:
         run: dotnet build --no-restore
         
       - name: Running Testings
-        run: docker-compose -f "docker-compose-all-in-one.yml" up --exit-code-from integration-tests
-        
-      - name: Stop containers
-        if: always()
-        run: docker-compose -f "docker-compose-all-in-one.yml" down
+        run: docker-compose -f "docker-compose-all-in-one.yml" up --abort-on-container-exit --exit-code-from integration-tests
