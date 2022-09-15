@@ -11,6 +11,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddHttpClient("EchoApi")
+    .ConfigureHttpClient(httpClient => httpClient.BaseAddress = new Uri("http://localhost:5500"));
+
 builder.Services.AddTransient<IDbConnection>((services) =>
  new NpgsqlConnection(
         services.GetRequiredService<IConfiguration>()

@@ -1,4 +1,5 @@
 using System.Data;
+using System.Web;
 using Microsoft.AspNetCore.Mvc;
 using Dapper;
 
@@ -20,7 +21,18 @@ public class PersonController : ControllerBase
             Persons = result.ToArray() 
         });
     }
-    
+
+    [HttpGet("echo")]
+    public async Task<IActionResult> GetEcho([FromQuery]string personName,
+        [FromServices]IHttpClientFactory httpClientFactory)
+    {
+        var httpClient = httpClientFactory.CreateClient("EchoApi");
+
+        var responseText = await httpClient.GetStringAsync("/echo?personName=" + HttpUtility.UrlEncode(personName));
+
+        return Ok(responseText);
+    }
+
 }
 
 public class PersonDto
