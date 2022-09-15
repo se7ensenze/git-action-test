@@ -14,5 +14,9 @@ services:
     command:
       [
         "dotnet",
-        "test"
+        "test",
+        "-r",
+        "TestResults",
+        "--logger",
+        "trx;LogFileName=test-results.trx"
       ]
