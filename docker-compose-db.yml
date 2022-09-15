@@ -14,10 +14,14 @@ services:
       - "max_connections=400"
       - "-c"
       - "shared_buffers=2GB"
+      - "-p"
+      - "5499"
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
     volumes:
       - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+    expose:
+      - "5499" # Publishes 5499 to other containers but NOT to host machine
     ports:
-      - 5432:5432
+      - "5499:5499"

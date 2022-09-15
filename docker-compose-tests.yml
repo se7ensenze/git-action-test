@@ -7,7 +7,7 @@ services:
     container_name: integration-tests
     image: mcr.microsoft.com/dotnet/sdk:6.0
     environment:
-      - ConnectionStrings__TestDb=Server=my-postgres;Port=5432;Database=test;User Id=postgres;Password=postgres;
+      - ConnectionStrings__TestDb=Server=my-postgres;Port=5499;Database=test;User Id=postgres;Password=postgres;
     volumes:
       - ./:/app
     working_dir: /app

@@ -30,6 +30,7 @@ jobs:
         run: docker-compose -f "docker-compose-db.yml" up 
         
       - name: Rung Testing
+        if: success()
         run: docker-compose -f "docker-compose-tests.yml" up --exit-code-from integration-tests
         
       - name: Stop containers
