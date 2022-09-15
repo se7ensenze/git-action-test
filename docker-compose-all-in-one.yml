@@ -1,0 +1,44 @@
+version: "3.9"
+networks:
+  default:
+    name: my-solution-infrastructure
+services:
+  
+  ### Postgres ###
+  postgres:
+    image: postgres:latest
+    container_name: my-postgres
+    command:
+      - "postgres"
+      - "-c"
+      - "max_connections=400"
+      - "-c"
+      - "shared_buffers=2GB"
+      - "-p"
+      - "5499"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    expose:
+      - "5499" # Publishes 5499 to other containers but NOT to host machine
+    ports:
+      - "5499:5499"
+  integration-tests:
+    container_name: integration-tests
+    image: mcr.microsoft.com/dotnet/sdk:6.0
+    environment:
+      - ConnectionStrings__TestDb=Server=my-postgres;Port=5499;Database=test;User Id=postgres;Password=postgres;
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command:
+      [
+        "dotnet",
+        "test",
+        "-r",
+        "TestResults",
+        "--logger",
+        "trx;LogFileName=test-results.trx"
+      ]
+    links:
+      - postgres

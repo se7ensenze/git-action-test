@@ -26,13 +26,9 @@ jobs:
       - name: Build
         run: dotnet build --no-restore
         
-      - name: Running Testing Infrastructure
-        run: docker-compose -f "docker-compose-db.yml" up --exit-code-from postgres
-        
-      - name: Rung Testing
-        if: success()
-        run: docker-compose -f "docker-compose-tests.yml" up --exit-code-from integration-tests
+      - name: Running Testings
+        run: docker-compose -f "docker-compose-all-in-one.yml" up --exit-code-from integration-tests
         
       - name: Stop containers
         if: always()
-        run: docker-compose -f "docker-compose-db.yml" down --remove-orphans
+        run: docker-compose -f "docker-compose-all-in-one.yml.yml" down
