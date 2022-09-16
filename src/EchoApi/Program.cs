@@ -17,6 +17,13 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.MapGet("/echo", (string personName) => $"Echo !! > {personName}")
-.WithName("GetWeatherForecast");
+    .WithName("Echo");
+
+app.MapGet("/hi", (string personName) => $"Hi, {personName}")
+    .WithName("Hi");
 
 app.Run();
+
+public partial class Program
+{
+}
