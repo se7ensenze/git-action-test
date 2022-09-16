@@ -6,6 +6,10 @@
         <Nullable>enable</Nullable>
 
         <IsPackable>false</IsPackable>
+
+        <AssemblyName>TodoApi.IntegrationTests</AssemblyName>
+
+        <RootNamespace>TodoApi.IntegrationTests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

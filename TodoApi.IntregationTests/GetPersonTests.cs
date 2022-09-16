@@ -3,7 +3,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json.Linq;
 
-namespace TodoApi.IntregationTests;
+namespace TodoApi.IntegrationTests;
 
 public class GetPersonTests
     :IClassFixture<GetPersonTestsFixture>
