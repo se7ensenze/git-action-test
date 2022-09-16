@@ -15,16 +15,8 @@ jobs:
       - name: Pull code
         uses: actions/checkout@v3
         
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: 6.0.x
-          
-      - name: Restore dependencies
-        run: dotnet restore
+      - name: Run Infrastructure
+        run: docker-compose -f "docker-compose-infrastructure.yml" up -d
         
-      - name: Build
-        run: dotnet build --no-restore
-        
-      - name: Running Testings
-        run: docker-compose -f "docker-compose-all-in-one.yml" up --abort-on-container-exit --exit-code-from integration-tests
+      - name: Run Build and Testing
+        run: docker-compose -f "docker-compose-build-and-tests.yml" up --exit-code-from integration-tests

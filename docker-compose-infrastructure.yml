@@ -1,0 +1,25 @@
+version: "3.9"
+networks:
+  default:
+    name: my-solution-infrastructure
+services:
+  
+  ### Postgres ###
+  postgres:
+    image: postgres:latest
+    container_name: my-postgres
+    command:
+      - "postgres"
+      - "-c"
+      - "max_connections=400"
+      - "-c"
+      - "shared_buffers=2GB"
+      - "-p"
+      - "5499"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    expose:
+      - "5499" # Publishes 5499 to other containers but NOT to host machine
+    ports:
+      - "5499:5499"

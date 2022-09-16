@@ -1,0 +1,24 @@
+version: "3.9"
+networks:
+  default:
+    name: my-solution-infrastructure
+services:
+  integration-tests:
+    container_name: integration-tests
+    image: mcr.microsoft.com/dotnet/sdk:6.0
+    environment:
+      - ConnectionStrings__TestDb=Server=my-postgres;Port=5499;Database=test;User Id=postgres;Password=postgres;
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command:
+      [
+        "dotnet",
+        "test"
+      ]
+    healthcheck:
+      #postgres
+      test: ["CMD", "nc", "-z", "-v", "localhost", "5499"]
+      timeout: 45s
+      interval: 10s
+      retries: 10
